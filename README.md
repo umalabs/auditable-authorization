@@ -1,3 +1,3 @@
 # Macaroons – made from scratch!
 
-Macaroons, made from scratch using a new recipe with the fresh ingredients.
+Macaroons, made from scratch using an UMA recipe with the fresh HMAC ingredients.
