@@ -40,7 +40,7 @@ Macaroons possessors must be registered at the authorization server (public clie
 
 ## Use Case
 
-Chained Resource Servers. Advanced authorization scenarios.
+Advanced authorization scenarios e.g. chained resource servers. 
 
 ### Example
 
