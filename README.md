@@ -128,4 +128,4 @@ Credits go to [WG - User-Managed Access][1] and [Google Research Publications][2
 [3]: https://github.com/umalabs/uma-pocop-tokens
 [4]: https://github.com/umalabs/uma-pocop-tokens#chained-macs-with-multiple-messages
 [5]: https://github.com/umalabs/uma-pocop-tokens#chained-macs-with-multiple-keys
-[6]: https://github.com/umalabs/uma-pocop-tokens#pocop-mechanism
+[6]: https://github.com/umalabs/uma-pocop-tokens#pocop-token-mechanism
