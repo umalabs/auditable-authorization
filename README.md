@@ -6,7 +6,7 @@ Macaroons, made from scratch using an UMA recipe with the fresh HMAC ingredients
 
 ## Introduction
 
-Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risk associated with bearer tokens, UMA Macaroons may be used instead of bearer tokens. UMA Macaroon is a chronological tamper-resistant record of all the possessors of the macaroon and the changes that have been made. UMA Macaroons use a chained message authentication code construction as a correlation mechanism among all participants and their data in the authorization flow.
+Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risk associated with bearer tokens, UMA Macaroons may be used instead of bearer tokens. UMA Macaroon is a chronological tamper-resistant record of all the possessors of the macaroon and the changes that have been made. UMA Macaroons use a [Chained MACs with Multiple Keys][4] construction as a correlation mechanism among all participants and their data in the authorization flow.
 
 ## Main Differences from Google Macaroons
 
@@ -18,23 +18,23 @@ Bearer tokens are vulnerable at rest and in transit when an attacker is able to 
 
 ## Concept
 
-1. To ensure integrity protection of macaroon claims, macaroons use a chained message checksum.
+The [POCOP Token Mechanism][5] is used to construct macaroons.
+
+1. To ensure integrity protection of macaroon claims, macaroons use a [Chained MACs with Multiple Messages][3] construction. All MACs must be discarded after use.
 
 MAC<sub><i>macaroon_1</i></sub> = HMAC(...HMAC(HMAC(K<sub><i>possessor_1</i></sub>, claim_1<sub><i>possessor_1</i></sub>), claim_2<sub><i>possessor_1</i></sub>,) ...claim_n<sub><i>possessor_1</i></sub>)
 
-2. Chained proof-of-possession is used to ensure the authenticity of macaroons.
+2. [Chained MACs with Multiple Keys][4] construction is used to assure the authenticity of macaroons. The input MAC<sub><i>macaroon_1</i></sub> must be discarded after use. The final MAC<sub><i>macaroon_1</i></sub> can be published, there is no need to hide it.
 
 MAC<sub><i>macaroon_1</i></sub> = HMAC(K<sub><i>possessor_1</i></sub>, MAC<sub><i>macaroon_1</i></sub>)
 
-- hop to the possessor_2
+- Hop to the possessor_2.
 
 MAC<sub><i>macaroon_1</i></sub> = HMAC(K<sub><i>possessor_2</i></sub>, MAC<sub><i>macaroon_1</i></sub>)
 
-3. The MAC<sub><i>macaroon_1</i></sub> is added to the possessor_2 macaroon as the first claim.
+3. Macaroons use a [Chained MACs with Multiple Messages][3] construction. The MAC<sub><i>macaroon_1</i></sub> is added to the possessor_2 macaroon as the first claim. The other MACs must be discarded after use.
 
 MAC<sub><i>macaroon_2</i></sub> = HMAC(...HMAC(HMAC(K<sub><i>possessor_2</i></sub>, MAC<sub><i>macaroon_1</i></sub>), claim_2<sub><i>possessor_2</i></sub>), ...claim_n<sub><i>possessor_2</i></sub>)
-
-Each MAC value is discarded immediately after chaining except for the macaroon terminal value and the value after hop HMAC chaining, which is added as a claim to the new possessor's macaroon. 
 
 Macaroons possessors must be registered at the authorization server (public clients can use dynamic registration to become confidential clients). Macaroons are verified via introspection endpoints at the authorization server.
 
@@ -124,3 +124,7 @@ Encrypted claims. (TBD)
 Credits go to [WG - User-Managed Access][1].
 
 [1]: https://kantarainitiative.org/confluence/display/uma/Home
+[2]: https://github.com/umalabs/uma-pocop-tokens
+[3]: https://github.com/umalabs/uma-pocop-tokens#chained-macs-with-multiple-messages
+[4]: https://github.com/umalabs/uma-pocop-tokens#chained-macs-with-multiple-keys
+[5]: https://github.com/umalabs/uma-pocop-tokens#pocop-mechanism
