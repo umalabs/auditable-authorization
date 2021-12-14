@@ -16,7 +16,7 @@ Bearer tokens are vulnerable at rest and in transit when an attacker is able to 
 * Different HMAC chaining is used.
 * Macaroons are verified at the authorization server.
 
-## Concept of MACs chaining
+## Concept of MACs Chaining
 
 The [POCOP Token Mechanism][6] is used to construct macaroons.
 
