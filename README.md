@@ -115,7 +115,7 @@ MAC<sub><i>RS_2</i></sub> = HMAC(K<sub><i>RS_2</i></sub>, MAC<sub><i>RS_2</i></s
 
 A macaroon can contain another macaroon.
 
-## Example of Nested Macaroon
+### Example of Nested Macaroon
 
 This is an excerpt from the above example extended by third party claims.
 
