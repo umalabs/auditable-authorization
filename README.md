@@ -6,15 +6,16 @@ Macaroons, made from scratch using an UMA recipe with the fresh HMAC ingredients
 
 ## Introduction
 
-Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risk associated with bearer tokens, UMA Macaroons may be used instead of bearer tokens. UMA Macaroon is a chronological tamper-resistant record of all the possessors of the macaroon and the changes that have been made. UMA Macaroons use a composite [Chained-MACs-with-Multiple-Messages][4] / [Chained-MACs-with-Multiple-Keys][5] construction as a correlation mechanism among all participants and their data in the authorization flow. UMA Macaroons adopt the User-Managed Access concept of authorization server, resource server, client, resource owner and requesting party.
+Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risk associated with bearer tokens, UMA Macaroons may be used instead of bearer tokens. UMA Macaroon is a chronological tamper-resistant record of all its possessors and the changes that have been made to it. In the authorization flow, UMA Macaroons use a complex combination of [Chained-MACs-with-Multiple-Messages][4] and [Chained-MACs-with-Multiple-Keys][5] constructions as a correlation mechanism among all participants and their data. UMA Macaroons adopt the User-Managed Access concept of authorization server, resource server, client, resource owner and requesting party.
 
 ## Key Differences from Google Macaroons
 
-* Authenticated macaroon possessors.
+* Authenticated possessors.
 * Claims are used instead of caveats.
-* An authorization server is required.
-* Different HMAC chaining is used.
-* Macaroons are verified at the authorization server.
+* Different HMAC chaining.
+* Verification at the authorization server.
+
+Following we use the term *macaroon* to refer to UMA Macaroon.
 
 ## Concept of MACs Chaining
 
@@ -42,7 +43,7 @@ Macaroons possessors must be registered at the authorization server (public clie
 
 Advanced authorization scenarios e.g. chained resource servers.
 
-### Example
+### Example of chained macaroons
 
 
 The HMAC chain may started with an AS or any other registered client.
@@ -110,9 +111,13 @@ MAC<sub><i>RS_2</i></sub> = HMAC(K<sub><i>RS_2</i></sub>, MAC<sub><i>RS_2</i></s
 - The last MAC<sub><i>RS_2</i></sub> can be verified via the introspection endpoint of the AS.
 
 
-## Nested/third-party claims
+## Nested macaroons
 
 A macaroon claim can contain another macaroon.
+
+## Example of the nested macaroon
+
+...
 
 ## Confidential claims
 
