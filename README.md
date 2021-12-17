@@ -39,11 +39,11 @@ MAC<sub><i>macaroon_2</i></sub> = HMAC(...HMAC(HMAC(K<sub><i>possessor_2</i></su
 
 Macaroons possessors must be registered at the authorization server (public clients can use dynamic registration to become confidential clients). Macaroons are verified via the introspection endpoint of the authorization server.
 
-## Use Case
+## Use Cases
 
 Advanced authorization scenarios e.g. chained resource servers.
 
-### Example of chained macaroons
+### Example of Chained Macaroons
 
 
 The HMAC chain may started with an AS or any other registered client.
@@ -111,15 +111,55 @@ MAC<sub><i>RS_2</i></sub> = HMAC(K<sub><i>RS_2</i></sub>, MAC<sub><i>RS_2</i></s
 - The last MAC<sub><i>RS_2</i></sub> can be verified via the introspection endpoint of the AS.
 
 
-## Nested macaroons
+## Nested Macaroons
 
-A macaroon claim can contain another macaroon.
+A macaroon can contain another macaroon.
 
-## Example of the nested macaroon
+## Example of Nested Macaroon
+
+This is an excerpt from the above example extended by third party claims.
 
 ...
 
-## Confidential claims
+- Hop to the next possessor – the client.
+
+MAC<sub><i>AS</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>AS</i></sub>)
+
+MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, NONCE<sub><i>client</i></sub>)
+
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, MAC<sub><i>AS</i></sub>)
+
+- Hop to the next possessor – the AS_third_party.
+
+MAC<sub><i>client</i></sub> = HMAC(K<sub><i>AS_third_party</i></sub>, MAC<sub><i>client</i></sub>)
+
+MAC<sub><i>AS_third_party</i></sub> = HMAC(K<sub><i>AS_third_party</i></sub>, NONCE<sub><i>AS_third_party</i></sub>)
+
+MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, MAC<sub><i>client</i></sub>)
+
+MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claim_1<sub><i>AS_third_party</i></sub>)
+
+MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claim_2<sub><i>AS_third_party</i></sub>)
+
+MAC<sub><i>AS_third_party</i></sub> = HMAC(K<sub><i>AS_third_party</i></sub>, MAC<sub><i>AS_third_party</i></sub>)
+
+- Hop to the next possessor – back to the client.
+
+MAC<sub><i>AS_third_party</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>AS_third_party</i></sub>)
+
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, MAC<sub><i>AS_third_party</i></sub>)
+
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_1<sub><i>client</i></sub>)
+
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_2<sub><i>client</i></sub>)
+
+MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>client</i></sub>)
+
+- Hop to the next possessor – the RS_1.
+
+...
+
+## Confidential Claims
 
 Encrypted claims. (TBD)
 
