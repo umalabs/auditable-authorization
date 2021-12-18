@@ -6,7 +6,7 @@ Macaroons, made from scratch using an UMA recipe with the fresh HMAC ingredients
 
 ## Introduction
 
-Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risk associated with bearer tokens, UMA Macaroons may be used instead of bearer tokens. UMA Macaroons are chained cryptographic tokens bearing a chronological tamper-resistant record of all their possessors and the changes that have been made to them. In the authorization flow, UMA Macaroons use a complex combination of [Chained-MACs-with-Multiple-Messages][4] and [Chained-MACs-with-Multiple-Keys][5] constructions as a correlation mechanism among all participants and their data. UMA Macaroons adopt the User-Managed Access concept of authorization server, resource server, client, resource owner and requesting party.
+Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risk associated with bearer tokens, UMA Macaroons may be used instead of bearer tokens. UMA Macaroons are cryptographically chained tokens bearing a chronological tamper-resistant record of all their possessors and the changes that have been made to them. In the authorization flow, UMA Macaroons use a complex combination of [Chained-MACs-with-Multiple-Messages][4] and [Chained-MACs-with-Multiple-Keys][5] constructions as a correlation mechanism among all participants and their data. UMA Macaroons adopt the User-Managed Access concept of authorization server, resource server, client, resource owner and requesting party.
 
 ## Key Differences from Google Macaroons
 
