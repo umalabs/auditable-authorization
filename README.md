@@ -127,7 +127,7 @@ MAC<sub><i>RS_2</i></sub> = HMAC(K<sub><i>RS_2</i></sub>, MAC<sub><i>RS_2</i></s
 - The last MAC<sub><i>RS_2</i></sub> can be verified via the introspection endpoint of the AS.
 
 
-## Nested Macaroons
+## Nested Macaroon / Third-Party Claims
 
 A macaroon can contain another macaroon.
 
