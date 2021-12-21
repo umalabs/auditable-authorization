@@ -145,6 +145,9 @@ MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, NONCE<sub><i>clien
 
 MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, MAC<sub><i>AS</i></sub>)
 
+MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>client</i></sub>)
+
+
 - Hop to the next possessor – the AS_third_party.
 
 MAC<sub><i>client</i></sub> = HMAC(K<sub><i>AS_third_party</i></sub>, MAC<sub><i>client</i></sub>)
