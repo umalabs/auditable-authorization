@@ -127,7 +127,7 @@ MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>client<
 
 ## Confidential Claims
 
-Encrypted claims. (TBD)
+The third-party claims can be chained using the AES-GCM authenticated encryption algorithm instead of the HMAC message authentication algorithm.
 
 ## Conclusion
 
