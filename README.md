@@ -23,7 +23,7 @@ The [POCOP Token Mechanism][6] is used to construct macaroons.
 
 1. To ensure integrity protection of macaroon claims, the first macaroon uses a [Chained-MACs-with-Multiple-Messages][4] construction. All MACs must be discarded after use.
 
-MAC<sub><i>macaroon_1</i></sub> = HMAC(...HMAC(HMAC(K<sub><i>possessor_1</i></sub>, claim_1<sub><i>possessor_1</i></sub>), claim_2<sub><i>possessor_1</i></sub>), ...claim_n<sub><i>possessor_1</i></sub>)
+MAC<sub><i>macaroon_1</i></sub> = HMAC(...HMAC(HMAC(K<sub><i>possessor_1</i></sub>, claims_1<sub><i>possessor_1</i></sub>), claims_2<sub><i>possessor_1</i></sub>), ...claims_n<sub><i>possessor_1</i></sub>)
 
 2. [Chained-MACs-with-Multiple-Keys][5] construction is used to assure the authenticity of macaroons. The input MAC<sub><i>macaroon_1</i></sub> must be discarded after use. The final MAC<sub><i>macaroon_1</i></sub> can be published, there is no need to hide it.
 
@@ -33,9 +33,9 @@ MAC<sub><i>macaroon_1</i></sub> = HMAC(K<sub><i>possessor_1</i></sub>, MAC<sub><
 
 MAC<sub><i>macaroon_1</i></sub> = HMAC(K<sub><i>possessor_2</i></sub>, MAC<sub><i>macaroon_1</i></sub>)
 
-3. The second macaroon uses the [Chained-MACs-with-Multiple-Messages][4] construction in a similar manner to the first macaroon. The MAC<sub><i>macaroon_1</i></sub> is added to the possessor_2 macaroon as the first claim. The other MACs must be discarded after use.
+3. The second macaroon uses the [Chained-MACs-with-Multiple-Messages][4] construction in a similar manner to the first macaroon. The MAC<sub><i>macaroon_1</i></sub> is added to the possessor_2 macaroon in the first claims. The other MACs must be discarded after use.
 
-MAC<sub><i>macaroon_2</i></sub> = HMAC(...HMAC(HMAC(K<sub><i>possessor_2</i></sub>, MAC<sub><i>macaroon_1</i></sub>), claim_2<sub><i>possessor_2</i></sub>), ...claim_n<sub><i>possessor_2</i></sub>)
+MAC<sub><i>macaroon_2</i></sub> = HMAC(...HMAC(HMAC(K<sub><i>possessor_2</i></sub>, MAC<sub><i>macaroon_1</i></sub>), claims_2<sub><i>possessor_2</i></sub>), ...claims_n<sub><i>possessor_2</i></sub>)
 
 Macaroons possessors must be registered at the authorization server (public clients can use dynamic registration to become confidential clients). Macaroons are verified via the introspection endpoint of the authorization server.
 
@@ -45,42 +45,47 @@ Advanced authorization scenarios e.g. chained resource servers.
 
 ### Example of Chained Macaroons
 
+Each macaroon contains the mandatory claims:
 
-The HMAC chain may started with an AS or any other registered client. Each macaroon starts with a random NONCE to prevent replay attack. Claim_1 is a mandatory "iss" claim that identifies who created the macaroon. Claim_2 is an issued-at "iat" timestamp of the macaroon. All claims are public.
+* The random NONCE to prevent replay attack.
+* The claim that identifies who created the token.
+* The timestamp of when the token was issued.
+
+The HMAC chain may started with an AS or any other registered client. 
 
 - The AS is the first macaroon possessor.<br><br>
 MAC<sub><i>AS</i></sub> = HMAC(K<sub><i>AS</i></sub>, NONCE<sub><i>AS</i></sub>)<br>
-MAC<sub><i>AS</i></sub> = HMAC(MAC<sub><i>AS</i></sub>, claim_1<sub><i>AS</i></sub>)<br>
-MAC<sub><i>AS</i></sub> = HMAC(MAC<sub><i>AS</i></sub>, claim_2<sub><i>AS</i></sub>)<br>
+MAC<sub><i>AS</i></sub> = HMAC(MAC<sub><i>AS</i></sub>, claims_1<sub><i>AS</i></sub>)<br>
+MAC<sub><i>AS</i></sub> = HMAC(MAC<sub><i>AS</i></sub>, claims_2<sub><i>AS</i></sub>)<br>
 ...<br>
-MAC<sub><i>AS</i></sub> = HMAC(MAC<sub><i>AS</i></sub>, claim_n<sub><i>AS</i></sub>)<br>
+MAC<sub><i>AS</i></sub> = HMAC(MAC<sub><i>AS</i></sub>, claims_n<sub><i>AS</i></sub>)<br>
 MAC<sub><i>AS</i></sub> = HMAC(K<sub><i>AS</i></sub>, MAC<sub><i>AS</i></sub>)<br>
 - Hop to the next possessor – the client.<br><br>
 MAC<sub><i>AS</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>AS</i></sub>)<br>
 MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, NONCE<sub><i>client</i></sub>)<br>
 MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, MAC<sub><i>AS</i></sub>)<br>
-MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_1<sub><i>client</i></sub>)<br>
-MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_2<sub><i>client</i></sub>)<br>
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claims_1<sub><i>client</i></sub>)<br>
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claims_2<sub><i>client</i></sub>)<br>
 ...<br>
-MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_n<sub><i>client</i></sub>)<br>
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claims_n<sub><i>client</i></sub>)<br>
 MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>client</i></sub>)<br>
 - Hop to the next possessor – the RS_1.<br><br>
 MAC<sub><i>client</i></sub> = HMAC(K<sub><i>RS_1</i></sub>, MAC<sub><i>client</i></sub>)<br>
 MAC<sub><i>RS_1</i></sub> = HMAC(K<sub><i>RS_1</i></sub>, NONCE<sub><i>RS_1</i></sub>)<br>
 MAC<sub><i>RS_1</i></sub> = HMAC(MAC<sub><i>RS_1</i></sub>, MAC<sub><i>client</i></sub>)<br>
-MAC<sub><i>RS_1</i></sub> = HMAC(MAC<sub><i>RS_1</i></sub>, claim_1<sub><i>RS_1</i></sub>)<br>
-MAC<sub><i>RS_1</i></sub> = HMAC(MAC<sub><i>RS_1</i></sub>, claim_2<sub><i>RS_1</i></sub>)<br>
+MAC<sub><i>RS_1</i></sub> = HMAC(MAC<sub><i>RS_1</i></sub>, claims_1<sub><i>RS_1</i></sub>)<br>
+MAC<sub><i>RS_1</i></sub> = HMAC(MAC<sub><i>RS_1</i></sub>, claims_2<sub><i>RS_1</i></sub>)<br>
 ...<br>
-MAC<sub><i>RS_1</i></sub> = HMAC(MAC<sub><i>RS_1</i></sub>, claim_n<sub><i>RS_1</i></sub>)<br>
+MAC<sub><i>RS_1</i></sub> = HMAC(MAC<sub><i>RS_1</i></sub>, claims_n<sub><i>RS_1</i></sub>)<br>
 MAC<sub><i>RS_1</i></sub> = HMAC(K<sub><i>RS_1</i></sub>, MAC<sub><i>RS_1</i></sub>)<br>
 - Hop to the next possessor – the RS_2.<br><br>
 MAC<sub><i>RS_1</i></sub> = HMAC(K<sub><i>RS_2</i></sub>, MAC<sub><i>RS_1</i></sub>)<br>
 MAC<sub><i>RS_2</i></sub> = HMAC(K<sub><i>RS_2</i></sub>, NONCE<sub><i>RS_2</i></sub>)<br>
 MAC<sub><i>RS_2</i></sub> = HMAC(MAC<sub><i>RS_2</i></sub>, MAC<sub><i>RS_1</i></sub>)<br>
-MAC<sub><i>RS_2</i></sub> = HMAC(MAC<sub><i>RS_2</i></sub>, claim_1<sub><i>RS_2</i></sub>)<br>
+MAC<sub><i>RS_2</i></sub> = HMAC(MAC<sub><i>RS_2</i></sub>, claims_1<sub><i>RS_2</i></sub>)<br>
 MAC<sub><i>RS_2</i></sub> = HMAC(MAC<sub><i>RS_2</i></sub>, claim_2<sub><i>RS_2</i></sub>)<br>
 ...<br>
-MAC<sub><i>RS_2</i></sub> = HMAC(MAC<sub><i>RS_2</i></sub>, claim_2<sub><i>RS_2</i></sub>)<br>
+MAC<sub><i>RS_2</i></sub> = HMAC(MAC<sub><i>RS_2</i></sub>, claims_2<sub><i>RS_2</i></sub>)<br>
 MAC<sub><i>RS_2</i></sub> = HMAC(K<sub><i>RS_2</i></sub>, MAC<sub><i>RS_2</i></sub>)<br>
 
 - The last MAC<sub><i>RS_2</i></sub> can be verified via the introspection endpoint of the AS.
@@ -103,18 +108,18 @@ MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>client<
 MAC<sub><i>client</i></sub> = HMAC(K<sub><i>AS_third_party</i></sub>, MAC<sub><i>client</i></sub>)<br>
 MAC<sub><i>AS_third_party</i></sub> = HMAC(K<sub><i>AS_third_party</i></sub>, NONCE<sub><i>AS_third_party</i></sub>)<br>
 MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, MAC<sub><i>client</i></sub>)<br>
-MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claim_1<sub><i>AS_third_party</i></sub>)<br>
-MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claim_2<sub><i>AS_third_party</i></sub>)<br>
+MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claims_1<sub><i>AS_third_party</i></sub>)<br>
+MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claims_2<sub><i>AS_third_party</i></sub>)<br>
 ...<br>
-MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claim_n<sub><i>AS_third_party</i></sub>)<br>
+MAC<sub><i>AS_third_party</i></sub> = HMAC(MAC<sub><i>AS_third_party</i></sub>, claims_n<sub><i>AS_third_party</i></sub>)<br>
 MAC<sub><i>AS_third_party</i></sub> = HMAC(K<sub><i>AS_third_party</i></sub>, MAC<sub><i>AS_third_party</i></sub>)<br><br>
 - Hop to the next possessor – back to the client.<br><br>
 MAC<sub><i>AS_third_party</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>AS_third_party</i></sub>)<br>
 MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, MAC<sub><i>AS_third_party</i></sub>)<br>
-MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_1<sub><i>client</i></sub>)<br>
-MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_2<sub><i>client</i></sub>)<br>
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claims_1<sub><i>client</i></sub>)<br>
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claims_2<sub><i>client</i></sub>)<br>
 ...<br>
-MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claim_n<sub><i>client</i></sub>)<br>
+MAC<sub><i>client</i></sub> = HMAC(MAC<sub><i>client</i></sub>, claims_n<sub><i>client</i></sub>)<br>
 MAC<sub><i>client</i></sub> = HMAC(K<sub><i>client</i></sub>, MAC<sub><i>client</i></sub>)<br><br>
 - Hop to the next possessor – the RS_1.
 
