@@ -89,7 +89,7 @@ The HMAC chain may started with an AS or any other registered client.
 ...<br>
 *MAC*<sub>*RS_2*</sub> = DHMAC(*K*<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>, *claims_2*<sub>*RS_2*</sub>)<br>
 
-- The last MAC<sub>*RS_2*</sub> can be verified via the introspection endpoint of the AS.
+- The last *MAC*<sub>*RS_2*</sub> can be verified via the introspection endpoint of the AS.
 
 ## Nested Macaroon / Third-Party Claims
 
