@@ -19,25 +19,18 @@ Following we use the term *macaroon* to refer to UMA Macaroon.
 
 ## Concept of MACs Chaining
 
-The [POCOP Token Mechanism][6] is used to construct macaroons.
+To create Macaroons we use the HMAC chaining construct *MAC*&#160;=&#160;HMAC(*K*,&#160;HMAC(*MAC*,&#160;*m*)) broken down into individual MACs,
 
-1. To ensure integrity protection of macaroon claims, the first macaroon uses a [Chained-MACs-with-Multiple-Messages][4] construction. All MACs must be discarded after use.
+*MAC*&#160;=&#160;HMAC(*MAC*,&#160;*m*)<br>
+*MAC*&#160;=&#160;HMAC(*K*,&#160;*MAC*)
 
-*MAC*<sub>*macaroon_1*</sub> = HMAC(...HMAC(HMAC(*K*<sub>*possessor_1*</sub>, *claims_1*<sub>*possessor_1*</sub>), *claims_2*<sub>*possessor_1*</sub>), ...*claims_n*<sub>*possessor_1*</sub>)
+which forms the basis of the Macaroons chaining mechanism.
 
-2. [Chained-MACs-with-Multiple-Keys][5] construction is used to assure the authenticity of macaroons. The input MAC<sub><i>macaroon_1</i></sub> must be discarded after use. The final MAC<sub><i>macaroon_1</i></sub> can be published, there is no need to hide it.
+To simplify notation, we use the Double HMAC construct – a nested HMAC function, denoted by DHMAC, that takes 3 inputs (*K*,&#160;*MAC*,&#160;*m*) and outputs a message authentication code
 
-*MAC*<sub>*macaroon_1*</sub> = HMAC(*K*<sub>*possessor_1*</sub>, *MAC*<sub>*macaroon_1*</sub>)
+*MAC*&#160;=&#160;DHMAC(*K*,&#160;*MAC*,&#160;*m*)&#160;=&#160;HMAC(*K*,&#160;HMAC(*MAC*,&#160;*m*))
 
-- Hop to the possessor_2.
-
-*MAC*<sub>*macaroon_1*</sub> = HMAC(*K*<sub>*possessor_2*</sub>, *MAC*<sub>*macaroon_1*</sub>)
-
-3. The second macaroon uses the [Chained-MACs-with-Multiple-Messages][4] construction in a similar manner to the first macaroon. The MAC<sub><i>macaroon_1</i></sub> is added to the possessor_2 macaroon in the first claims. The other MACs must be discarded after use.
-
-*MAC*<sub>*macaroon_2*</sub> = HMAC(...HMAC(HMAC(*K*<sub>*possessor_2*</sub>, *MAC*<sub>*macaroon_1*</sub>), *claims_2*<sub>*possessor_2*</sub>), ...*claims_n*<sub>*possessor_2*</sub>)
-
-To simplify notation, we use the Double HMAC construct – a nested HMAC function, denoted by DHMAC, that takes 3 inputs (*K*, *MAC*, *m*) and outputs a message authentication code *MAC* = DHMAC(*K*, *MAC*, *m*) = HMAC(*K*, HMAC(*MAC*, *m*)), where *K* is the secret key, *MAC* is the input message authentication code, and *m* is the message to be authenticated.
+where *K* is the secret key, *MAC* is the input message authentication code, and *m* is the message to be authenticated.
 
 Macaroons possessors must be registered at the authorization server (public clients can use dynamic registration to become confidential clients). Macaroons are verified via the introspection endpoint of the authorization server.
 
