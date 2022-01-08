@@ -58,13 +58,13 @@ Additional groups of optional claims (e.g. in JSON format) can be added at any t
 The HMAC chain may started with an AS or any other registered client. 
 
 - The AS is the first macaroon possessor.<br><br>
-*MAC*<sub>*AS*</sub> = HMAC(K<sub>*AS*</sub>, NONCE<sub>*AS*</sub>)<br>
+*MAC*<sub>*AS*</sub> = HMAC(*K*<sub>*AS*</sub>, NONCE<sub>*AS*</sub>)<br>
 *MAC*<sub>*AS*</sub> = DHMAC(*K*<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>, Timestamp<sub>*AS*</sub>)<br>
 *MAC*<sub>*AS*</sub> = DHMAC(*K*<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>, URI<sub>*AS*</sub>)<br>
 *MAC*<sub>*AS*</sub> = DHMAC(*K*<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>, *claims_1*<sub>*AS*</sub>)<br>
 ...<br>
 *MAC*<sub>*AS*</sub> = DHMAC(*K*<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>, *claims_n*<sub>*AS*</sub>)<br>
-*MAC*<sub>*AS*</sub> = HMAC(K<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>)<br><br>
+*MAC*<sub>*AS*</sub> = HMAC(*K*<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>)<br><br>
 - Hop to the next possessor – the client.<br><br>
 *MAC*<sub>*client*</sub> = HMAC(*K*<sub>*client*</sub>, NONCE<sub>*client*</sub>)<br>
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, Timestamp<sub>*client*</sub>)<br>
@@ -73,7 +73,7 @@ The HMAC chain may started with an AS or any other registered client.
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *claims_1*<sub>*client*</sub>)<br>
 ...<br>
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *claims_n*<sub>*client*</sub>)<br>
-*MAC*<sub>*client*</sub> = HMAC(K<sub>*client*</sub>, *MAC*<sub>*client*</sub>)<br><br>
+*MAC*<sub>*client*</sub> = HMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>)<br><br>
 - Hop to the next possessor – the RS_1.<br><br>
 *MAC*<sub>*RS_1*</sub> = HMAC(*K*<sub>*RS_1*</sub>, NONCE<sub>*RS_1*</sub>)<br>
 *MAC*<sub>*RS_1*</sub> = DHMAC(*K*<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>, Timestamp<sub>*RS_1*</sub>)<br>
@@ -82,7 +82,7 @@ The HMAC chain may started with an AS or any other registered client.
 *MAC*<sub>*RS_1*</sub> = DHMAC(*K*<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>, *claims_1*<sub>*RS_1*</sub>)<br>
 ...<br>
 *MAC*<sub>*RS_1*</sub> = DHMAC(*K*<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>, *claims_n*<sub>*RS_1*</sub>)<br>
-*MAC*<sub>*RS_1*</sub> = HMAC(K<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>)<br><br>
+*MAC*<sub>*RS_1*</sub> = HMAC(*K*<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>)<br><br>
 - Hop to the next possessor – the RS_2.<br><br>
 *MAC*<sub>*RS_2*</sub> = HMAC(*K*<sub>*RS_2*</sub>, NONCE<sub>*RS_2*</sub>)<br>
 *MAC*<sub>*RS_2*</sub> = DHMAC(*K*<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>, Timestamp<sub>*RS_2*</sub>)<br>
@@ -91,7 +91,7 @@ The HMAC chain may started with an AS or any other registered client.
 *MAC*<sub>*RS_2*</sub> = DHMAC(K<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>, *claims_1*<sub>*RS_2*</sub>)<br>
 ...<br>
 *MAC*<sub>*RS_2*</sub> = DHMAC(*K*<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>, *claims_2*<sub>*RS_2*</sub>)<br>
-*MAC*<sub>*RS_2*</sub> = HMAC(K<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>)<br>
+*MAC*<sub>*RS_2*</sub> = HMAC(*K*<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>)<br>
 
 The last *MAC*<sub>*RS_2*</sub> can be verified via the introspection endpoint of the AS.
 
