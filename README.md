@@ -64,6 +64,7 @@ The HMAC chain may started with an AS or any other registered client.
 *MAC*<sub>*AS*</sub> = DHMAC(*K*<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>, *claims_1*<sub>*AS*</sub>)<br>
 ...<br>
 *MAC*<sub>*AS*</sub> = DHMAC(*K*<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>, *claims_n*<sub>*AS*</sub>)<br>
+*MAC*<sub>*AS*</sub> = HMAC(K<sub>*AS*</sub>, *MAC*<sub>*AS*</sub>)<br><br>
 - Hop to the next possessor – the client.<br><br>
 *MAC*<sub>*client*</sub> = HMAC(*K*<sub>*client*</sub>, NONCE<sub>*client*</sub>)<br>
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, Timestamp<sub>*client*</sub>)<br>
@@ -72,6 +73,7 @@ The HMAC chain may started with an AS or any other registered client.
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *claims_1*<sub>*client*</sub>)<br>
 ...<br>
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *claims_n*<sub>*client*</sub>)<br>
+*MAC*<sub>*client*</sub> = HMAC(K<sub>*client*</sub>, *MAC*<sub>*client*</sub>)<br><br>
 - Hop to the next possessor – the RS_1.<br><br>
 *MAC*<sub>*RS_1*</sub> = HMAC(*K*<sub>*RS_1*</sub>, NONCE<sub>*RS_1*</sub>)<br>
 *MAC*<sub>*RS_1*</sub> = DHMAC(*K*<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>, Timestamp<sub>*RS_1*</sub>)<br>
@@ -80,6 +82,7 @@ The HMAC chain may started with an AS or any other registered client.
 *MAC*<sub>*RS_1*</sub> = DHMAC(*K*<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>, *claims_1*<sub>*RS_1*</sub>)<br>
 ...<br>
 *MAC*<sub>*RS_1*</sub> = DHMAC(*K*<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>, *claims_n*<sub>*RS_1*</sub>)<br>
+*MAC*<sub>*RS_1*</sub> = HMAC(K<sub>*RS_1*</sub>, *MAC*<sub>*RS_1*</sub>)<br><br>
 - Hop to the next possessor – the RS_2.<br><br>
 *MAC*<sub>*RS_2*</sub> = HMAC(*K*<sub>*RS_2*</sub>, NONCE<sub>*RS_2*</sub>)<br>
 *MAC*<sub>*RS_2*</sub> = DHMAC(*K*<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>, Timestamp<sub>*RS_2*</sub>)<br>
@@ -88,8 +91,9 @@ The HMAC chain may started with an AS or any other registered client.
 *MAC*<sub>*RS_2*</sub> = DHMAC(K<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>, *claims_1*<sub>*RS_2*</sub>)<br>
 ...<br>
 *MAC*<sub>*RS_2*</sub> = DHMAC(*K*<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>, *claims_2*<sub>*RS_2*</sub>)<br>
+*MAC*<sub>*RS_2*</sub> = HMAC(K<sub>*RS_2*</sub>, *MAC*<sub>*RS_2*</sub>)<br>
 
-- The last *MAC*<sub>*RS_2*</sub> can be verified via the introspection endpoint of the AS.
+The last *MAC*<sub>*RS_2*</sub> can be verified via the introspection endpoint of the AS.
 
 ## Nested Macaroon / Third-Party Claims
 
@@ -112,12 +116,14 @@ This is an excerpt from the above Example of Chained Macaroons extended by third
 *MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, *MAC*<sub>*client*</sub>)<br>
 *MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, *claims_1*<sub>*AS_third_party*</sub>)<br>
 ...<br>
-*MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, *claims_n*<sub>*AS_third_party*</sub>)<br><br>
+*MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, *claims_n*<sub>*AS_third_party*</sub>)<br>
+*MAC*<sub>*AS_third_party*</sub> = HMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>)<br><br>
 - Hop to the next possessor – back to the client.<br><br>
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *MAC*<sub>*AS_third_party*</sub>)<br>
 *MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *claims_1*<sub>*client*</sub>)<br>
 ...<br>
-*MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *claims_n*<sub>*client*</sub>)<br><br>
+*MAC*<sub>*client*</sub> = DHMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>, *claims_n*<sub>*client*</sub>)<br>
+*MAC*<sub>*client*</sub> = HMAC(*K*<sub>*client*</sub>, *MAC*<sub>*client*</sub>)<br><br>
 - Hop to the next possessor – the RS_1.
 
 ...
@@ -136,7 +142,8 @@ This is an excerpt from the above Example of Nested Macaroon extended by confide
 *MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, *MAC*<sub>*client*</sub>)<br>
 *MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, Enc(*K*<sub>*AS_third_party*</sub>, *claims_1*<sub>*AS_third_party*</sub>))<br>
 ...<br>
-*MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, Enc(*K*<sub>*AS_third_party*</sub>, *claims_n*<sub>*AS_third_party*</sub>))<br><br>
+*MAC*<sub>*AS_third_party*</sub> = DHMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>, Enc(*K*<sub>*AS_third_party*</sub>, *claims_n*<sub>*AS_third_party*</sub>))<br>
+*MAC*<sub>*AS_third_party*</sub> = HMAC(*K*<sub>*AS_third_party*</sub>, *MAC*<sub>*AS_third_party*</sub>)<br><br>
 - Hop to the next possessor – back to the client.
 
 ...
