@@ -6,7 +6,7 @@ Bearer tokens are vulnerable at rest and in transit when an attacker is able to 
 
 ## Introduction
 
-Bearer tokens are easy to use and easy to integrate with any client, server, and mobile device. Once they have been minted on the authorization server, they don't require additional processing on the client, and token validation on the resource server is trivial. While existing technology standards are acceptable for many use cases, they have been harder adopt in the healthcare industry and financial sector, where higher degree of authenticity and integrity of authorization process is required.
+Bearer tokens are easy to use and easy to integrate with any client, server, and mobile device. Once they have been minted on the authorization server, they don't require additional processing on the client, and token validation on the resource server is trivial. While existing technology standards are acceptable for many use cases, they have been harder adopt in the healthcare industry and financial sector, where higher degree of authenticity and integrity of authorization process is required. An auditable authorization mechanism allows Identity and Access Management (IAM) systems to authorize resource access using AAT that can simultaneously ensure compliance with financial and legal regulations.
 
 ## Conclusion
 
