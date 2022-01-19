@@ -15,3 +15,12 @@ The auditable authorization concept is based on a verifiable tamper-resistant au
 ## Conclusion
 
 By utilizing simple cryptographic techniques, the AAT mechanism may be used instead of bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of AAT, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
+
+## Acknowledgment
+
+Credits go to [WG - User-Managed Access][1], [Google Research Publications][2] and [Audit in OAuth 2.0][3]
+
+[1]: https://kantarainitiative.org/confluence/display/uma/Home
+[2]: https://research.google/pubs/pub41892/
+[3]: https://datatracker.ietf.org/doc/html/draft-tsitkov-oauth-audit-02
+
