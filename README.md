@@ -18,7 +18,7 @@ By utilizing simple cryptographic techniques, the AAT mechanism may be used inst
 
 ## Acknowledgment
 
-Credits go to [WG - User-Managed Access][1], [Google Research Publications][2] and [Audit in OAuth 2.0][3]
+Credits go to [WG - User-Managed Access][1], [Google Research Publications][2] and [Audit in OAuth 2.0][3].
 
 [1]: https://kantarainitiative.org/confluence/display/uma/Home
 [2]: https://research.google/pubs/pub41892/
