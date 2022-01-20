@@ -1,0 +1,35 @@
+.markdown-preview.markdown-preview {
+
+    // custom prince pdf export style
+    &.prince {
+        column-count: 2;
+
+        font-family: Georgia, serif;
+        font-size: 0.74rem;
+        text-align: justify;
+        line-height: normal;
+        font-stretch: semi-condensed;
+        @page {
+            margin: 3.8em;
+        }
+        h1 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            font-stretch: expanded;
+        }
+        h1, .author {
+            column-span: all;
+            text-align: center;
+        }
+        h2, h3, h4, h5, h6 {
+            font-family: Georgia, serif;
+            font-size: 0.80rem;
+            line-height: normal;
+            font-weight: normal;
+            font-stretch: expanded;
+        }
+        // .abstract {
+        //     font-weight: bold;
+        // }
+    }
+}
