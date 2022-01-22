@@ -41,7 +41,7 @@ Each block contains four mandatory claims:
 * The random NONCE to prevent replay attack.
 * The timestamp of when the block was created.
 * The URI that identifies who created the block.
-* The MAC value of previous record from the previous block.
+* The MAC value of the last record from the previous block.
 
 Additional groups of optional claims (e.g., in JSON format) can be added at any time until the block is sent to the next possessor.
 
