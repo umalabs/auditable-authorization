@@ -19,7 +19,7 @@ The auditable authorization concept is based on a verifiable tamper-resistant au
 
 ## III. Conclusion
 
-By utilizing simple cryptographic techniques, the AAT mechanism may be used instead of bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of AAT, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
+By utilizing simple cryptographic techniques, the AAT mechanism may be used instead of bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of the auditable authorization, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
 
 ## Acknowledgment
 
