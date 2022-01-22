@@ -15,7 +15,39 @@ Bearer tokens are easy to use and easy to integrate with any client, server, and
 
 ## II. Concept
 
-The auditable authorization concept is based on a verifiable tamper-resistant audit trail created by authenticated participants (authorization server, client, resource server) during the respective stages of the authorization process.
+The auditable authorization concept is based on a verifiable tamper-resistant audit trail created by authenticated participants (authorization server, client, resource server) during the respective stages of the authorization process. The audit trail carries information in the form of a sequence of records organized into blocks. Each block comes from an individual participant – a block possessor. Records and blocks are chained using the MAC value of the previous record.
+
+#### *A. Record Chaining*
+
+To create a chain of records we use the HMAC chaining construct *MAC*&#160;=&#160;HMAC(*K*,&#160;HMAC(*MAC*,&#160;*m*)), broken down into individual MACs,
+
+*MAC*&#160;=&#160;HMAC(*MAC*,&#160;*m*)  
+*MAC*&#160;=&#160;HMAC(*K*,&#160;*MAC*)
+
+which forms the basis of the record chaining mechanism.
+
+To simplify notation, we use the Double HMAC construct – a nested HMAC function, denoted by DHMAC, that takes 3 inputs (*K*,&#160;*MAC*,&#160;*m*) and outputs a message authentication code
+
+*MAC*&#160;=&#160;DHMAC(*K*,&#160;*MAC*,&#160;*m*)&#160;=&#160;HMAC(*K*,&#160;HMAC(*MAC*,&#160;*m*))
+
+where *K* is the secret key, *MAC* is the input message authentication code, and *m* is the message to be authenticated.
+
+#### *B. Block Chaining*
+
+The block possessor must be registered at the authorization server (public clients can use dynamic registration to become confidential clients).
+
+Each block contains four mandatory claims:
+
+* The random NONCE to prevent replay attack.
+* The timestamp of when the block was created.
+* The URI that identifies who created the block.
+* The MAC value of previous record from the previous block.
+
+Additional groups of optional claims (e.g., in JSON format) can be added at any time until the block is sent to the next possessor.
+
+#### *C. Verification*
+
+Blocks are verified via the introspection endpoint of the authorization server.
 
 ## III. Conclusion
 
