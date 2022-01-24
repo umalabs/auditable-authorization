@@ -7,11 +7,11 @@
     izboran@gmail.com
 </p>
 
-***Abstract*** **– Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risk associated with bearer tokens, the Authorization Audit Trail (AAT) may be used instead of bearer tokens in the authorization process. AAT consists of cryptographically chained blocks of data bearing a chronological tamper-resistant records of all their possessors and the changes that have been made by them. A nested, chained MAC construction (e.g., HMAC) is used to ensure the authenticity and integrity of AAT. All sensitive information are encrypted to preserve confidentiality. The access control relies on a real-time auditability of AAT by the authorization server. The AAT concept is compatible with existing OAuth2 and UMA protocols.**
+***Abstract*** **– Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risks associated with bearer tokens, an Authorization Audit Trail (AAT) may be used alongside the bearer tokens during the authorization process. AAT consists of cryptographically chained blocks of data bearing a chronological tamper-resistant records of all their possessors and the changes that have been made by them. A nested, chained MAC construction (e.g., HMAC) is used to ensure the authenticity and integrity of AAT. All sensitive information are encrypted to preserve confidentiality. The access control relies on a real-time auditability of AAT by the authorization server. The AAT concept is compatible with existing OAuth2 and UMA protocols.**
 
 ## I. Introduction
 
-Bearer tokens are easy to use and easy to integrate with any client, server, and mobile device. Once they have been minted on the authorization server, they don't require additional processing on the client, and token validation on the resource server is trivial. While existing technology standards are acceptable for many use cases, they have been harder adopt in the healthcare industry and financial sector, where higher degree of authenticity and integrity of authorization process is required. An auditable authorization mechanism allows Identity and Access Management (IAM) systems to authorize resource access using AAT while ensuring compliance with financial and legal regulations.
+Bearer tokens are easy to use and easy to integrate with any client, server, and mobile device. Once they have been minted on the authorization server, they don't require additional processing on the client, and token validation on the resource server is trivial. While existing technology standards are acceptable for many use cases, they have been harder adopt in the healthcare industry and financial sector, where higher degree of authenticity and integrity of authorization process is required. An auditable authorization concept allows Identity and Access Management (IAM) systems to enhance token-based authorization mechanism while ensuring compliance with financial and legal regulations.
 
 ## II. Concept
 
@@ -36,14 +36,14 @@ where *K* is the secret key, *MAC* is the input message authentication code, and
 
 The block possessor must be registered at the authorization server (public clients can use dynamic registration to become confidential clients).
 
-Each block contains four mandatory claims:
+Each block contains four mandatory records:
 
 * The random NONCE to prevent replay attack.
 * The timestamp of when the block was created.
 * The URI that identifies who created the block.
 * The MAC value of the last record from the previous block.
 
-Additional groups of optional claims (e.g., in JSON format) can be added at any time until the block is sent to the next possessor.
+Additional groups of optional records can be added at any time until the block is sent to the next possessor.
 
 #### *C. Verification*
 
@@ -51,7 +51,7 @@ Blocks are verified via the introspection endpoint of the authorization server.
 
 ## III. Conclusion
 
-By utilizing simple cryptographic techniques, the AAT mechanism may be used instead of bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of the auditable authorization, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
+By utilizing simple cryptographic techniques, the AAT mechanism may be used alongside the bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of the auditable authorization, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
 
 ## Acknowledgment
 
