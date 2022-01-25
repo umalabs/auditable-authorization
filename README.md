@@ -53,6 +53,10 @@ Blocks are verified via the introspection endpoint of the authorization server.
 
 By utilizing simple cryptographic techniques, the AAT mechanism may be used alongside the bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of the auditable authorization, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
 
+## IV. Future Work
+
+As a part of future work, we plan to explore the possibility of replacing the bearer tokens with AAT and storing JWT claims in the form of a set of records directly into chained blocks.
+
 ## Acknowledgment
 
 Credits go to [WG - User-Managed Access][1], [Google Research Publications][2] and [Audit in OAuth 2.0][3].
