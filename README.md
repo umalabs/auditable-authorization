@@ -7,7 +7,7 @@
     izboran@gmail.com
 </p>
 
-***Abstract*** **– Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risks associated with bearer tokens, an authorization audit trail may be used alongside the bearer tokens during the authorization process. The authorization audit trail is the intrinsically recorded transaction flow of the authorization process. It consists of cryptographically chained blocks of data bearing a chronological tamper-resistant records of all their possessors and the changes that have been made by them. A nested, chained MAC construction (e.g., HMAC) is used to ensure the authenticity and integrity of the audit trail. All sensitive information are encrypted to preserve confidentiality. The access control relies on a real-time auditability of the authorization audit trail by the authorization server. The authorization audit trail concept is compatible with existing OAuth2 and UMA protocols.**
+***Abstract*** **– Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to illegally access private information. In order to mitigate some of the risks associated with bearer tokens, an authorization audit trail may be used alongside the bearer tokens during the authorization process. The authorization audit trail (hereinafter simply referred to as "audit trail") is the intrinsically recorded transaction flow of the authorization process. It consists of cryptographically chained blocks of data bearing a chronological tamper-resistant records of all their possessors and the changes that have been made by them. A nested, chained MAC construction (e.g., HMAC) is used to ensure the authenticity and integrity of the audit trail. All sensitive information are encrypted to preserve confidentiality. The access control relies on a real-time auditability of the audit trail by the authorization server. The audit trail concept is compatible with existing OAuth2 and UMA protocols.**
 
 ## I. Introduction
 
@@ -15,7 +15,7 @@ Bearer tokens are easy to use and easy to integrate with any client, server, and
 
 ## II. Concept
 
-The auditable authorization concept is based on a verifiable tamper-resistant audit trail created by authenticated participants (authorization server, client, resource server) during the respective stages of the authorization process. The authorization audit trail carries information in the form of a sequence of records organized into blocks. Each block comes from an individual participant – a block possessor. Records and blocks are chained using the MAC value of the previous record.
+The auditable authorization concept is based on a verifiable tamper-resistant audit trail created by authenticated participants (authorization server, client, resource server) during the respective stages of the authorization process. The audit trail carries information in the form of a sequence of records organized into blocks. Each block comes from an individual participant – a block possessor. Records and blocks are chained using the MAC value of the previous record.
 
 #### *A. Record Chaining*
 
@@ -51,11 +51,11 @@ Blocks are verified via the introspection endpoint of the authorization server.
 
 ## III. Conclusion
 
-By utilizing simple cryptographic techniques, the authorization audit trail mechanism may be used alongside the bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of the auditable authorization, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
+By utilizing simple cryptographic techniques, the audit trail mechanism may be used alongside the bearer tokens during the authorization process. This concept of auditable authorization mitigates the risk associated with bearer tokens to illegally access private information. In a broader scope of the auditable authorization, there is the possibility of using the recorded data for forensic analysis and verification of legal compliances.
 
 ## IV. Future Work
 
-As a part of future work, we plan to explore the possibility of replacing the bearer tokens with authorization audit trail and storing JWT claims in the form of a set of records directly into chained blocks.
+As a part of future work, we plan to explore the possibility of replacing the bearer tokens with audit trail and storing JWT claims in the form of a set of records directly into chained blocks.
 
 ## Acknowledgment
 
