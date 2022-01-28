@@ -59,9 +59,9 @@ As a part of future work, we plan to explore the possibility of replacing the be
 
 ## Acknowledgment
 
-Credits go to [WG - User-Managed Access][1], [Google Research Publications][2] and [Audit in OAuth 2.0][3].
+This work has benefited from the valuable WG-UMA discussions on Audit in UMA [1], [2], [3], and from the Audit in OAuth 2.0 IETF Draft [4].
 
-[1]: https://kantarainitiative.org/confluence/display/uma/Home
-[2]: https://research.google/pubs/pub41892/
-[3]: https://datatracker.ietf.org/doc/html/draft-tsitkov-oauth-audit-02
-
+[1] WG-UMA, Audit in UMA, Wed Jul 16 2014, https://kantarainitiative.org/pipermail/wg-uma/2014-July/002889.html.  
+[2] WG-UMA, Audit in UMA, Mon Aug 18 2014, https://kantarainitiative.org/pipermail/wg-uma/2014-August/002966.html.  
+[3] WG-UMA, Audit in UMA, Mon Aug 18 2014, https://kantarainitiative.org/pipermail/wg-uma/2014-August/002967.html.  
+[4] Zh. Tsitkov, “Audit in OAuth 2.0”, IETF Draft, 2015, https://datatracker.ietf.org/doc/html/draft-tsitkov-oauth-audit-02.  
