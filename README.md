@@ -47,7 +47,7 @@ Additional groups of optional records can be added at any time until the block i
 
 #### *C. Verification*
 
-Blocks are verified via the introspection endpoint of the authorization server.
+The audit trail is reviewed in real-time by the authorization server that acts as an auditor. The resource server uses the token introspection endpoint of the authorization server to verify the audit trail and look up relevant information about the authorization process. The verification system of the authorization server is able to recreate MACs of the individual blocks of the audit trail using the shared secrets of the authorization flow participants. Thus, if any block of the audit trail was altered, then the audit trail tampering can be detected by comparing the recreated MACs with the audit trail MACs.
 
 ## III. Conclusion
 
