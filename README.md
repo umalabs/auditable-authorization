@@ -28,7 +28,7 @@ which forms the basis of the record chaining mechanism.
 
 To simplify notation, we use the Double HMAC construct—a nested HMAC function, denoted by DHMAC, that takes 3 inputs (*K*,&#160;*MAC*,&#160;*m*) and outputs a message authentication code
 
-*MAC*&#160;=&#160;DHMAC(*K*,&#160;*MAC*,&#160;*m*)&#160;=&#160;HMAC(*K*,&#160;HMAC(*MAC*,&#160;*m*))
+*MAC*&#160;=&#160;DHMAC(*K*,&#160;*MAC*,&#160;*m*)&#160;=&#160;HMAC(*K*,&#160;HMAC(*MAC*,&#160;*m*)),
 
 where *K* is the secret key, *MAC* is the input message authentication code, and *m* is the message to be authenticated.
 
@@ -55,7 +55,7 @@ By utilizing simple cryptographic techniques, we can build the audit trail that,
 
 ## IV. Future Work
 
-As a part of future work, we plan to explore the possibility of replacing the bearer tokens with an audit trail and storing JWT claims as a set of records directly into chained blocks.
+As a part of future work, we plan to explore the possibility of omitting the bearer tokens altogether and storing JWT claims as a set of records directly into chained blocks of the audit trail.
 
 ## Acknowledgment
 
