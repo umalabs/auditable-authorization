@@ -49,11 +49,24 @@ Additional groups of optional records can be added at any time until the block i
 
 The audit trail is reviewed in real-time by the authorization server that acts as an auditor. Given that, the resource server uses the token introspection endpoint of the authorization server to verify the audit trail and look up relevant information about the authorization process. The verification system of the authorization server is able to recreate MACs of the individual blocks of the audit trail using the shared secrets of the authorization flow participants. Thus, if any block of the audit trail was altered, then the audit trail tampering can be detected by comparing the recreated MACs with the audit trail MACs.
 
-## III. Conclusion
+## III. Use Cases and Concrete Mechanisms
+
+...token vs. audit trail...
+...static scope vs. dynamic detailed consent...
+
+#### *A. Financial Services*
+
+...bank transfer / transaction / consent...
+
+#### *B. Healthcare*
+
+...health records sharing / consent...
+
+## IV. Conclusion
 
 By utilizing simple cryptographic techniques, we can build the audit trail that, when used alongside the bearer tokens, mitigates the risk that an adversary could gain illegal access to private information by stealing a token. As part of the broader applicability of the audit trail, the recorded data can later be used by government agencies and businesses for forensic analysis and compliance verification.
 
-## IV. Future Work
+## V. Future Work
 
 As a part of future work, we plan to explore the possibility of omitting the bearer tokens altogether and storing JWT claims as a set of records directly into chained blocks of the audit trail.
 
