@@ -7,7 +7,11 @@
     izboran@gmail.com
 </p>
 
-***Abstract***—**Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to gain illegal access to private information. In order to mitigate some of the risks associated with bearer tokens, an authorization audit trail may be used alongside the bearer tokens during the authorization process. The authorization audit trail (hereinafter simply referred to as “audit trail”) is the intrinsically recorded transaction flow of the authorization process. It comprises cryptographically chained blocks of data bearing chronological tamper-resistant records of all their possessors and the changes that have been made by them. A nested, chained MAC construction (e.g., HMAC) is used to ensure the authenticity and integrity of the audit trail. All sensitive information is encrypted to preserve confidentiality. The access control relies on a real-time auditability of the audit trail by the authorization server. The audit trail concept is compatible with existing OAuth 2.0 and UMA protocols.**
+***Abstract***—**Bearer tokens are vulnerable at rest and in transit when an attacker is able to intercept a token to gain illegal access to private information. In order to mitigate some of the risks associated with bearer tokens, an authorization audit trail may be used alongside the bearer tokens during the authorization process.**
+
+**The authorization audit trail (referred to as “audit trail”) is the intrinsically recorded transaction flow of the authorization process. It comprises cryptographically chained blocks of data bearing chronological tamper-resistant records of all their possessors and the changes that have been made by them. Given that, the audit trail can carry both coarse-grained and fine-grained authorization data. Notably, this is useful in the healthcare industry and financial sector.**
+
+**A nested, chained MAC construction (e.g., HMAC) is used to ensure the authenticity and integrity of the audit trail. All sensitive information is encrypted to preserve confidentiality. The access control relies on a real-time auditability of the audit trail by the authorization server. The audit trail concept is compatible with existing OAuth 2.0 and UMA protocols.**
 
 ## I. Introduction
 
