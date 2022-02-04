@@ -55,7 +55,7 @@ The audit trail is reviewed in real-time by the authorization server that acts a
 
 ## III. Use Cases and Concrete Mechanisms
 
-...token vs. audit trail...
+...token / ticket vs. audit trail...
 ...static scope vs. dynamic detailed consent...
 
 #### *A. Financial Services*
@@ -65,6 +65,7 @@ The audit trail is reviewed in real-time by the authorization server that acts a
 #### *B. Healthcare*
 
 ...health records sharing / consent...
+(Julie Use-case - consult with Alec)
 
 ## IV. Conclusion
 
