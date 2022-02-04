@@ -65,6 +65,7 @@ The audit trail is reviewed in real-time by the authorization server that acts a
 #### *B. Healthcare*
 
 ...health records sharing / consent...
+...UMA ticket -> audit trail...
 (Julie Use-case - consult with Alec)
 
 ## IV. Conclusion
