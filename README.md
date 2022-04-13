@@ -55,18 +55,11 @@ The audit trail is reviewed in real-time by the authorization server that acts a
 
 ## III. Use Cases and Concrete Mechanisms
 
-...token / ticket vs. audit trail...
-...static scope vs. dynamic detailed consent...
+User-Managed Access
 
-#### *A. Financial Services*
+#### *Chained RPT and PAT*
 
-...bank transfer / transaction / consent...
-
-#### *B. Healthcare*
-
-...health records sharing / consent...
-...UMA ticket -> audit trail...
-(Julie Use-case - consult with Alec)
+TBD
 
 ## IV. Conclusion
 
