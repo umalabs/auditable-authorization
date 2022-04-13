@@ -1,0 +1,1 @@
+gs -dSAFER -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=Auditable Authorization.pdf README.pdf pdfmarks
