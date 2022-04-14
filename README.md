@@ -61,13 +61,17 @@ Additional groups of optional records can be added at any time until the block i
 
 ## III. Use Cases and Concrete Mechanisms
 
-&emsp;User-Managed Access—chained RPT and PAT.
+&emsp;User-Managed Access: client->RS->AS communication.
 
-#### *A. Managing Resources*
+#### *A. Permission Tickets*
 
 &emsp;TBD
 
-#### *B. Managing Resource Permissions*
+#### *B. Managing Resources*
+
+&emsp;TBD
+
+#### *C. Managing Resource Permissions*
 
 &emsp;TBD
 
