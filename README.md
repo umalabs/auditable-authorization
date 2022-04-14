@@ -55,9 +55,13 @@ The audit trail is reviewed in real-time by the authorization server that acts a
 
 ## III. Use Cases and Concrete Mechanisms
 
-User-Managed Access
+User-Managed Access, chained RPT and PAT.
 
-#### *Chained RPT and PAT*
+#### *A. Managing Resources*
+
+TBD
+
+#### *B. Managing Resource Permissions*
 
 TBD
 
