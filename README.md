@@ -61,7 +61,10 @@ Additional groups of optional records can be added at any time until the block i
 
 ## III. Use Cases and Concrete Mechanisms
 
-&emsp;User-Managed Access: client->RS->AS communication.
+&emsp;A User-Managed Access authorization flow: client->RS->AS=>RS=>client->AS=>client->RS->AS=>RS=>client
+
+-> request
+=> response
 
 #### *A. Permission Tickets*
 
