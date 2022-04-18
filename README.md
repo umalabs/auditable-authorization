@@ -53,9 +53,9 @@ Each credential contains four mandatory claims:
 * The URI that identifies who created the credential.
 * The MAC value of the last claim copied from the previous credential.
 
-Aditional claims can be added by the respective principal at any time until the credential is sent to the next principal.
+Aditional claims can be added by the respective principal at any time until the credential sequence is sent to the next principal.
 
-The sequence of credentials is terminated by the terminal, final MAC value of the sequence.
+Before sending the credential sequence to another principal, this sequence is locked with a hash value of the final MAC value to prevent further chaining. Only the authorization server may issue the unlocked credentials. If another principal wants to continue in chaining, it must contact the authorization server to unlock the credential sequence.
 
 #### *C. Verification*
 
