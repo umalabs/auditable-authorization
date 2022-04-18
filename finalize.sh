@@ -1,1 +1,1 @@
-gs -dSAFER -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=Authorization_Trail.pdf README.pdf pdfmarks
+gs -dSAFER -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=Chained_Credentials-Based_Authorization.pdf README.pdf pdfmarks
