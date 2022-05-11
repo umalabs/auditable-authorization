@@ -1,11 +1,26 @@
 <!-- @import "style.less" -->
 
-# Chained Credentials-Based Authorization (2CBA)
+# XYZ
 
 <p class="author">
     Igor Zboran<br>
     izboran@gmail.com
 </p>
+
+A nested HMAC chaining with Client's and RS's secret keys, pre-generated on the AS, could be a DPOP alternative. The Client and the RS must be registered at the AS to get secret keys.
+
+On the token request, the AS creates NONCE, then computes the final MAC using the Client's and RS's secret keys and puts NONCE and terminal MAC values into the generated token. The Client calculates an intermediate MAC value from NONCE using its secret key and sends it together with the access token to the RS. The RS calculates the final value that must match the pre-computed value embedded in the access token.
+
+Issues:
+
+1. Replay attack
+2. Data binding
+
+These issues can be solved in this way:
+
+On the token request, the AS computes another — a signing MAC from NONCE using the RS's secret key and puts it into generated token together with NONCE and terminal MAC. The Client uses this signing MAC to sign some critical data, similarly to DPOP. The data should have a timestamp value to prevent a replay attack. The data signature is sent to RS together with the access token and final MAC. Finally, the RS can compute the signing MAC using the NONCE and its secret key and verify the data signature.
+
+----------------------------------------obsolete-----------------------------------------------
 
 <p class="abstract">
 &emsp;<strong><em>Abstract</em></strong>—<s>User-Managed Access (UMA) [1, 2] is an authorization framework built on the top of OAuth 2.0 protocol that allows users to delegate access to their resources to other users. UMA manages this trick by using a sophisticated delegation model. The problem is that this model uses authorization flows when one resource server needs to access another resource server in order to fulfill the client request.</s>
